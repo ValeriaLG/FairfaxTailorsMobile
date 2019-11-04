@@ -6,6 +6,7 @@ import email from 'react-native-email';
 const min = Dimensions.get('window');
 
 
+
 export default class HelloWorldApp extends React.Component {
   render() {
     return (
@@ -17,7 +18,9 @@ export default class HelloWorldApp extends React.Component {
 }
 
 class MainScreen extends React.Component {
-
+  state={
+    keyboardBottom: false
+  }
 
   render(){
     let pictures = {
@@ -29,7 +32,7 @@ class MainScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.overallContainers}>
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView}  ref='_scrollView' onContentSizeChange={() => { (!this.state.keyboardBottom)? this.refs._scrollView.scrollTo({y: min.height * 3, animated: true}) : null }}>
           <Text style={styles.headerHome}>Fairfax Tailors</Text>
           <Image source={{uri: pictures.bannerUri}} style={styles.imageBanner}/>
           <View style={styles.tightenedArea}>
@@ -109,7 +112,7 @@ class MainScreen extends React.Component {
               </View>
             </View>
 
-            <FeedbackForm/>
+            <FeedbackForm scrollDown={() => this.setState({keyboardBottom: !this.state.keyboardBottom})}/>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -144,11 +147,12 @@ class FeedbackForm extends React.Component {
  }
 
   _keyboardDidShow = () => {
-  this.setState({keyboardShowed: true});
+  this.setState({keyboardShowed: true}, () => this.props.scrollDown());
+
 }
 
 _keyboardDidHide = () => {
-  this.setState({keyboardShowed: false});
+  this.setState({keyboardShowed: false}, () => this.props.scrollDown());
 }
 
   submitFeedback = () =>{
