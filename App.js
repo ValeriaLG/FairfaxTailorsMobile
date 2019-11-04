@@ -22,6 +22,10 @@ class MainScreen extends React.Component {
     keyboardBottom: false
   }
 
+  scrollToBottom = () =>{
+    this.setState({keyboardBottom: !this.state.keyboardBottom})
+  }
+
   render(){
     let pictures = {
       bannerUri: 'https://get.pxhere.com/photo/writing-hand-leather-yarn-thread-sew-close-up-glasses-schneider-scissors-tailoring-haberdashery-831331.jpg',
@@ -32,7 +36,7 @@ class MainScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.overallContainers}>
-        <ScrollView style={styles.scrollView}  ref='_scrollView' onContentSizeChange={() => { (!this.state.keyboardBottom)? this.refs._scrollView.scrollTo({y: min.height * 3, animated: true}) : null }}>
+        <ScrollView style={styles.scrollView}  ref='_scrollView' onContentSizeChange={() => { (this.state.keyboardBottom)? this.refs._scrollView.scrollTo({y: min.height * 3, animated: true}) : null }}>
           <Text style={styles.headerHome}>Fairfax Tailors</Text>
           <Image source={{uri: pictures.bannerUri}} style={styles.imageBanner}/>
           <View style={styles.tightenedArea}>
@@ -112,7 +116,7 @@ class MainScreen extends React.Component {
               </View>
             </View>
 
-            <FeedbackForm scrollDown={() => this.setState({keyboardBottom: !this.state.keyboardBottom})}/>
+            <FeedbackForm scrollDown={() => this.scrollToBottom()}/>
           </View>
         </ScrollView>
       </SafeAreaView>
