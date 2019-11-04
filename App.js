@@ -6,12 +6,12 @@ import { createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import email from 'react-native-email';
 import {MainScreen} from './Home.js';
-import {Store} from './Store.js';
+import {Products} from './Products.js';
 const min = Dimensions.get('window');
 
 const MainNavigator = createStackNavigator({
   Home: { screen: MainScreen },
-  Store: { screen: Store },
+  Products: { screen: Products },
 });
 
 

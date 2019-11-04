@@ -1,11 +1,12 @@
 import React from 'react';
-import { AppRegistry, StyleSheet, Text, View, Image, Dimensions, SafeAreaView, ScrollView, Linking, TextInput, Button, Keyboard, KeyboardAvoidingView} from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Image, Dimensions, SafeAreaView, ScrollView, Linking, TextInput, Button, Keyboard, KeyboardAvoidingView, TouchableHighlight} from 'react-native';
 import {Asset} from 'expo-asset';
 import Constants from 'expo-constants';
 import { createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import email from 'react-native-email';
-import {Store} from './Store.js';
+import {Products} from './Products.js';
+import {styles} from './globalStyleSheet.js';
 const min = Dimensions.get('window');
 
 
@@ -29,21 +30,32 @@ export class MainScreen extends React.Component {
       bannerUri: 'https://get.pxhere.com/photo/writing-hand-leather-yarn-thread-sew-close-up-glasses-schneider-scissors-tailoring-haberdashery-831331.jpg',
       sewingServices1Uri: 'https://c.pxhere.com/photos/15/f1/sew_sewing_machine_fabric_handarbeiten_diy_hand_labor_zig_zag_tailoring-1170573.jpg!d',
       tapeMeasureServices2Uri: 'https://c.pxhere.com/photos/c7/e7/tailor\'s_chalk_sew_n_hutensilien_handarbeiten_meter_chalk_tailoring_craft-775049.jpg!d',
-      tailoringServices3Uri: 'https://get.pxhere.com/photo/white-clothing-outerwear-wool-material-button-fabric-textile-textiles-fluid-systems-1033761.jpg'
+      tailoringServices3Uri: 'https://get.pxhere.com/photo/white-clothing-outerwear-wool-material-button-fabric-textile-textiles-fluid-systems-1033761.jpg',
+      facebookIconUri: 'https://upload.wikimedia.org/wikipedia/commons/8/82/Facebook_icon.jpg',
+      yelpIconUri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Yelp.svg/384px-Yelp.svg.png'
     }
 
     const { navigate } = this.props.navigation;
 
     return (
       <SafeAreaView style={styles.containers}>
-        <ScrollView style={styles.scrollView}  ref='_scrollView' onContentSizeChange={() => { (this.state.keyboardBottom)? this.refs._scrollView.scrollTo({y: min.height * 3, animated: true}) : null }}>
+        <ScrollView style={styles.scrollView}  ref='_scrollView' onContentSizeChange={() => { (this.state.keyboardBottom)? this.refs._scrollView.scrollTo({y: min.height * 3.2, animated: true}) : null }}>
           <Text style={styles.headerHome}>Fairfax Tailors</Text>
           <Image source={{uri: pictures.bannerUri}} style={styles.imageBanner}/>
           <View style={styles.tightenedArea}>
             <Text style={styles.paragraph}>Fairfax Tailors is a small tailor shop located in Fair Oaks Mall in Northern Virginia.  We offer tailoring and alterations for all kinds of men’s, women’s, and children’s clothes.  In addition to tailoring, we also offer dry cleaning along with clothing repair services such as reweaving. Please call, email or visit our store with any further questions.</Text>
+
+            <View style={styles.storeBtn}>
+              <Button
+                title={'View Our Products'}
+                color='#808080'
+                onPress={() => this.props.navigation.navigate('Products')}
+              />
+            </View>
+
+
             <Text style={styles.headerServices}>Services We Offer</Text>
             <View style={styles.flexContainer}>
-            {/*do flexbox for images for services*/}
               <View style={styles.flexItem}>
                 <Image source={{uri: pictures.sewingServices1Uri}} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
@@ -104,22 +116,16 @@ export class MainScreen extends React.Component {
                 <Text style={styles.headerMinor}>
                   Social Media
                 </Text>
-                <Text style={styles.flexItemText}>
-                  <Text style={styles.hyperlink} onPress={() => Linking.openURL('https://www.facebook.com/pages/Fairfax-Tailors/191178054564294?rf=1630599570531888')}>
-                    FaceBook
-                  </Text>
-                  {"\n"}
-                  <Text style={styles.hyperlink} onPress={() => Linking.openURL('https://www.yelp.com/biz/fairfax-tailors-fairfax')}>
-                    Yelp
-                  </Text>
-                </Text>
+                <View style={styles.iconsArea}>
+                    <TouchableHighlight onPress={() => Linking.openURL('https://www.facebook.com/pages/Fairfax-Tailors/191178054564294?rf=1630599570531888')}>
+                      <Image source={{uri: pictures.facebookIconUri}} style={styles.iconsImage}/>
+                    </TouchableHighlight>
+                    <TouchableHighlight  onPress={() => Linking.openURL('https://www.yelp.com/biz/fairfax-tailors-fairfax')}>
+                      <Image source={{uri: pictures.yelpIconUri}} style={styles.iconsImage}/>
+                    </TouchableHighlight>
+                </View>
               </View>
             </View>
-            <Button
-              title={'Store'}
-              style={styles.input}
-              onPress={() => this.props.navigation.navigate('Store')}
-            />
 
             <FeedbackForm scrollDown={() => this.scrollToBottom()}/>
           </View>
@@ -208,87 +214,5 @@ _keyboardDidHide = () => {
   }
 }
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-  },
-  formContainerUnopen: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 10
-  },
-  formContainerOpen: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: min.height * 0.5
-  },
-  input: {
-    width: 200,
-    height: 44,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: 'black',
-    marginBottom: 10,
-  },
-  tightenedArea: {
-    marginHorizontal: 20
-  },
-  imageBanner: {
-    width: min.width,
-    height: 300
-  },
-  paragraph: {
-    textAlign: 'center',
-    paddingTop: min.height * 0.02,
-    paddingBottom: min.height * 0.02
-  },
-  hyperlink: {
-
-  },
-  flexContainer: {
-    flex: 1,
-    alignItems: 'center'
-  },
-  servicesImage: {
-    width: 300,
-    height: 300
-  },
-  flexItemText: {
-    paddingTop: min.height * 0.009,
-    textAlign: 'center',
-    fontSize: 15
-  },
-  flexItem: {
-    paddingTop: min.height * 0.04,
-    flex: 1,
-    alignItems: 'center',
-    width: 300
-  },
-  headerHome: {
-    fontSize: 40,
-    textAlign: 'center',
-    paddingTop: min.height * 0.05
-  },
-  headerServices: {
-    fontSize: 25,
-    textAlign: 'center',
-    paddingTop: min.height * 0.02
-  },
-  headerMisc: {
-    fontSize: 25,
-    textAlign: 'center',
-    paddingTop: min.height * 0.02
-  },
-  headerMinor: {
-    fontSize: 20,
-    textAlign: 'center'
-  }
-});
 
 AppRegistry.registerComponent('Home', () => Home);
