@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, SafeAreaView, ScrollView, Linking} from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, SafeAreaView, ScrollView, Linking, TextInput, Button, Keyboard, KeyboardAvoidingView} from 'react-native';
 import {Asset} from 'expo-asset';
 import Constants from 'expo-constants';
+import email from 'react-native-email';
 const min = Dimensions.get('window');
-// var imageBanner = require('../assets/images/white-clothing-outerwear-wool-material-button-1033761-pxhere.com.jpg');
+
 
 export default class HelloWorldApp extends React.Component {
   render() {
@@ -16,13 +17,16 @@ export default class HelloWorldApp extends React.Component {
 }
 
 class MainScreen extends React.Component {
-  render() {
+
+
+  render(){
     let pictures = {
       bannerUri: 'https://get.pxhere.com/photo/writing-hand-leather-yarn-thread-sew-close-up-glasses-schneider-scissors-tailoring-haberdashery-831331.jpg',
       sewingServices1Uri: 'https://c.pxhere.com/photos/15/f1/sew_sewing_machine_fabric_handarbeiten_diy_hand_labor_zig_zag_tailoring-1170573.jpg!d',
       tapeMeasureServices2Uri: 'https://c.pxhere.com/photos/c7/e7/tailor\'s_chalk_sew_n_hutensilien_handarbeiten_meter_chalk_tailoring_craft-775049.jpg!d',
       tailoringServices3Uri: 'https://get.pxhere.com/photo/white-clothing-outerwear-wool-material-button-fabric-textile-textiles-fluid-systems-1033761.jpg'
     }
+
     return (
       <SafeAreaView style={styles.overallContainers}>
         <ScrollView style={styles.scrollView}>
@@ -104,13 +108,93 @@ class MainScreen extends React.Component {
                 </Text>
               </View>
             </View>
+
+            <FeedbackForm/>
           </View>
         </ScrollView>
       </SafeAreaView>
     );
   }
-
 }
+
+class FeedbackForm extends React.Component {
+
+    state={
+      name: '',
+      email: '',
+      message: '',
+      keyboardShowed: false
+    }
+
+
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this._keyboardDidShow,
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+     'keyboardDidHide',
+     this._keyboardDidHide,
+   );
+  }
+
+  componentWillUnmount() {
+   this.keyboardDidShowListener.remove();
+   this.keyboardDidHideListener.remove();
+ }
+
+  _keyboardDidShow = () => {
+  this.setState({keyboardShowed: true});
+}
+
+_keyboardDidHide = () => {
+  this.setState({keyboardShowed: false});
+}
+
+  submitFeedback = () =>{
+    const to = ['FairfaxTailorsFeedback@outlook.com'] // string or array of email addresses
+        email(to, {
+            // Optional additional arguments
+            subject: 'Feedback from ' + this.state.name,
+            body: this.state.message + " \nEmail at: " + this.state.email
+        }).catch(console.error)
+
+  }
+
+  render() {
+    return (
+        <View style={this.state.keyboardShowed ? styles.formContainerOpen: styles.formContainerUnopen}>
+          <Text style={styles.headerMisc}>Not sure if we're the best fit?</Text>
+          <Text style={styles.paragraph}>We love to hear from customers, both past and present. Send us a message with details on your request, or any questions you have on our services. We will get back to you as soon as possible with an answer.</Text>
+          <TextInput
+            value={this.state.name}
+            onChangeText={(name) => this.setState({ name })}
+            placeholder={'Name'}
+            style={styles.input}
+          />
+          <TextInput
+            value={this.state.email}
+            onChangeText={(email) => this.setState({ email })}
+            placeholder={'Email'}
+            style={styles.input}
+          />
+          <TextInput
+            value={this.state.message}
+            onChangeText={(message) => this.setState({ message })}
+            placeholder={'Message'}
+            style={styles.input}
+          />
+
+          <Button
+            title={'Submit'}
+            style={styles.input}
+            onPress={this.submitFeedback.bind(this)}
+          />
+        </View>
+    );
+  }
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -118,6 +202,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+  },
+  formContainerUnopen: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10
+  },
+  formContainerOpen: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: min.height * 0.5
+  },
+  input: {
+    width: 200,
+    height: 44,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    marginBottom: 10,
   },
   tightenedArea: {
     marginHorizontal: 20
@@ -128,7 +232,8 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     textAlign: 'center',
-    paddingTop: min.height * 0.02
+    paddingTop: min.height * 0.02,
+    paddingBottom: min.height * 0.02
   },
   hyperlink: {
 
