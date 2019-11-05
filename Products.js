@@ -16,6 +16,7 @@ export class Products extends React.Component {
   };
 
   render() {
+    //backup uri for the images
     let pictures = {
       bannerUri: 'https://get.pxhere.com/photo/writing-hand-leather-yarn-thread-sew-close-up-glasses-schneider-scissors-tailoring-haberdashery-831331.jpg',
       whiteShirtUri: 'https://live.staticflickr.com/2856/9383173050_dfb2bd0a2c_b.jpg',
@@ -30,22 +31,27 @@ export class Products extends React.Component {
       <SafeAreaView style={styles.containers}>
         <ScrollView style={styles.scrollView}>
           <Text style={styles.headerHome}>Fairfax Tailors</Text>
-          <Image source={{uri: pictures.bannerUri}} style={styles.imageBanner}/>
+          <Image source={require('./assets/images/mainBanner.jpg')} style={styles.imageBanner}/>
           <View style={styles.tightenedArea}>
             <Text style={styles.headerServices}>Our Products</Text>
             <View style={styles.flexContainer}>
               <View style={styles.flexItem}>
-                <Image source={{uri: pictures.whiteShirtUri}} style={styles.servicesImage}/>
+                <Image source={require('./assets/images/ProductPicsClient/whiteBlouse.jpg')} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
                 </Text>
               </View>
               <View style={styles.flexItem}>
-                <Image source={{uri: pictures.womenSuitUri}} style={styles.servicesImage}/>
+                <Image source={require('./assets/images/ProductPicsClient/womensSuit.jpg')} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
                 </Text>
               </View>
               <View style={styles.flexItem}>
-                <Image source={{uri: pictures.overCoatUri}} style={styles.servicesImage}/>
+                <Image source={require('./assets/images/ProductPicsClient/Overcoat.png')} style={styles.servicesImage}/>
+                <Text style={styles.flexItemText}>
+                </Text>
+              </View>
+              <View style={styles.flexItem}>
+                <Image source={require('./assets/images/ProductPicsClient/menssuit.jpg')} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
                 </Text>
               </View>

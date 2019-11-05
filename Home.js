@@ -25,7 +25,7 @@ export class MainScreen extends React.Component {
   }
 
   render(){
-
+    //backup uri for the images
     let pictures = {
       bannerUri: 'https://get.pxhere.com/photo/writing-hand-leather-yarn-thread-sew-close-up-glasses-schneider-scissors-tailoring-haberdashery-831331.jpg',
       sewingServices1Uri: 'https://c.pxhere.com/photos/15/f1/sew_sewing_machine_fabric_handarbeiten_diy_hand_labor_zig_zag_tailoring-1170573.jpg!d',
@@ -41,7 +41,7 @@ export class MainScreen extends React.Component {
       <SafeAreaView style={styles.containers}>
         <ScrollView style={styles.scrollView}  ref='_scrollView' onContentSizeChange={() => { (this.state.keyboardBottom)? this.refs._scrollView.scrollTo({y: min.height * 3.2, animated: true}) : null }}>
           <Text style={styles.headerHome}>Fairfax Tailors</Text>
-          <Image source={{uri: pictures.bannerUri}} style={styles.imageBanner}/>
+          <Image source={require('./assets/images/mainBanner.jpg')} style={styles.imageBanner}/>
           <View style={styles.tightenedArea}>
             <Text style={styles.paragraph}>Fairfax Tailors is a small tailor shop located in Fair Oaks Mall in Northern Virginia.  We offer tailoring and alterations for all kinds of men’s, women’s, and children’s clothes.  In addition to tailoring, we also offer dry cleaning along with clothing repair services such as reweaving. Please call, email or visit our store with any further questions.</Text>
 
@@ -57,19 +57,19 @@ export class MainScreen extends React.Component {
             <Text style={styles.headerServices}>Services We Offer</Text>
             <View style={styles.flexContainer}>
               <View style={styles.flexItem}>
-                <Image source={{uri: pictures.sewingServices1Uri}} style={styles.servicesImage}/>
+                <Image source={require('./assets/images/sewingMachine.jpg')} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
                   Our skilled team of tailors can tailor your clothes to your specification for a better fit.
                 </Text>
               </View>
               <View style={styles.flexItem}>
-                <Image source={{uri: pictures.tapeMeasureServices2Uri}} style={styles.servicesImage}/>
+                <Image source={require('./assets/images/measureTape.jpg')} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
                   Our staff can provide detailed and accurate measurements and fittings to ensure that your clothing is altered to your satisfaction.
                 </Text>
               </View>
               <View style={styles.flexItem}>
-                <Image source={{uri: pictures.tailoringServices3Uri}} style={styles.servicesImage}/>
+                <Image source={require('./assets/images/clothingSuit.jpg')} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
                   We are able to measure you and provide advice on fabric selection, garment options, and garment care.
                 </Text>
@@ -118,10 +118,10 @@ export class MainScreen extends React.Component {
                 </Text>
                 <View style={styles.iconsArea}>
                     <TouchableHighlight onPress={() => Linking.openURL('https://www.facebook.com/pages/Fairfax-Tailors/191178054564294?rf=1630599570531888')}>
-                      <Image source={{uri: pictures.facebookIconUri}} style={styles.iconsImage}/>
+                      <Image source={require('./assets/images/socialMedia/Facebook_icon.jpg')} style={styles.iconsImage}/>
                     </TouchableHighlight>
                     <TouchableHighlight  onPress={() => Linking.openURL('https://www.yelp.com/biz/fairfax-tailors-fairfax')}>
-                      <Image source={{uri: pictures.yelpIconUri}} style={styles.iconsImage}/>
+                      <Image source={require('./assets/images/socialMedia/Yelp.png')} style={styles.iconsImage}/>
                     </TouchableHighlight>
                 </View>
               </View>
