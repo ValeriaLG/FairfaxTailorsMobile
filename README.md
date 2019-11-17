@@ -1,5 +1,5 @@
 # FairfaxTailorsMobile
-A mobile app to showcase the products of Fairfax Tailors.
+A mobile app to showcase the products of Fairfax Tailors. A demo can be viewed here on the [Fairfax Demo Environment](https://expo.io/@fairfaxt/FairfaxTailors).
 
 ## Developing
 
@@ -17,3 +17,9 @@ To run the application on your phone without plugging it in:
 1. Navigate to the root FairfaxTailors folder through command line
 2. Type "**expo start**" on the command line on your computer
 3. Scan the qr code with your mobile device (within the expo app if android and within the camera app if iPhone)
+
+### How To Publish
+To be able to demo the application remotely without needing a computer or having it in the app store: 
+1. Navigate to the root FairfaxTailors folder through command line
+2. Type "**expo start**" in the command line window
+3. In a new command line window, type "**expo publish**"
