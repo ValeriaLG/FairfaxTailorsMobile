@@ -38,21 +38,25 @@ export class Products extends React.Component {
               <View style={styles.flexItem}>
                 <Image source={require('./assets/images/ProductPicsClient/whiteBlouse.jpg')} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
+                  Rock the office look with this versatile, button-up dress shirt that goes great with any suit!
                 </Text>
               </View>
               <View style={styles.flexItem}>
                 <Image source={require('./assets/images/ProductPicsClient/womensSuit.jpg')} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
+                  Create an office-ready look with a tailored essential styled with a blazer and matching straight-leg pants.
                 </Text>
               </View>
               <View style={styles.flexItem}>
                 <Image source={require('./assets/images/ProductPicsClient/Overcoat.png')} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
+                  Be prepared for the winter weather with this overcoat, designed with a fit suited for your body and a timeless notched lapel.
                 </Text>
               </View>
               <View style={styles.flexItem}>
                 <Image source={require('./assets/images/ProductPicsClient/menssuit.jpg')} style={styles.servicesImage}/>
                 <Text style={styles.flexItemText}>
+                  A signature 2-piece stripped suit set with a sleek notch collared jacket and pants that are perfect for a day at the office.
                 </Text>
               </View>
             </View>

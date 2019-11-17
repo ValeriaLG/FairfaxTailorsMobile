@@ -30,7 +30,15 @@ export const styles =  StyleSheet.create({
     height: 44,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'grey',
+    marginBottom: 10,
+  },
+  inputBig: {
+    width: 200,
+    textAlignVertical: 'top',
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'grey',
     marginBottom: 10,
   },
   storeBtn: {
@@ -53,7 +61,8 @@ export const styles =  StyleSheet.create({
   },
   flexContainer: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: min.height * 0.02
   },
   servicesImage: {
     width: 300,

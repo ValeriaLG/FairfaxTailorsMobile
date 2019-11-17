@@ -10,8 +10,6 @@ import {styles} from './globalStyleSheet.js';
 const min = Dimensions.get('window');
 
 
-
-
 export class MainScreen extends React.Component {
   state={
     keyboardBottom: false
@@ -120,9 +118,6 @@ export class MainScreen extends React.Component {
                     <TouchableHighlight onPress={() => Linking.openURL('https://www.facebook.com/pages/Fairfax-Tailors/191178054564294?rf=1630599570531888')}>
                       <Image source={require('./assets/images/socialMedia/Facebook_icon.jpg')} style={styles.iconsImage}/>
                     </TouchableHighlight>
-                    <TouchableHighlight  onPress={() => Linking.openURL('https://www.yelp.com/biz/fairfax-tailors-fairfax')}>
-                      <Image source={require('./assets/images/socialMedia/Yelp.png')} style={styles.iconsImage}/>
-                    </TouchableHighlight>
                 </View>
               </View>
             </View>
@@ -198,15 +193,18 @@ _keyboardDidHide = () => {
             style={styles.input}
           />
           <TextInput
+            multiline
+            numberOfLines={5}
             value={this.state.message}
             onChangeText={(message) => this.setState({ message })}
-            placeholder={'Message'}
-            style={styles.input}
+            placeholder={'Your message'}
+            style={styles.inputBig}
           />
 
           <Button
             title={'Submit'}
             style={styles.input}
+            color='#808080'
             onPress={this.submitFeedback.bind(this)}
           />
         </View>
